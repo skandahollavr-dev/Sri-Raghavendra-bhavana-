@@ -1,10 +1,9 @@
-# Sri-Raghavendra-bhavana- /  [ index.html        ]
-<!DOCTYPE html>
+# Sri-Raghavendra-bhavana- /  [ index.html        ]<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sri Raghavendra Bhavan - Digital Menu</title>
+    <title>Sri Raghavendra Bhavan - Order Online</title>
     <style>
         :root {
             --primary-color: #e65100;
@@ -28,7 +27,7 @@
         .container {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px 15px 80px 15px;
+            padding: 20px 15px 120px 15px;
         }
 
         /* Header Styles */
@@ -122,12 +121,9 @@
             margin-bottom: 15px;
             padding-bottom: 8px;
             border-bottom: 2px solid #ffe0b2;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
-        /* Menu Item Styles */
+        /* Menu Item Styles with Controls */
         .menu-item {
             display: flex;
             justify-content: space-between;
@@ -149,16 +145,104 @@
             font-weight: 600;
             font-size: 1.05rem;
             color: var(--text-color);
+            display: block;
         }
 
         .item-price {
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--secondary-color);
-            white-space: nowrap;
         }
 
-        /* Footer */
+        /* Quantity Selector Buttons */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 30px;
+            padding: 3px;
+        }
+
+        .btn-qty {
+            background: white;
+            border: 1px solid #ddd;
+            color: var(--primary-color);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .btn-qty:active {
+            transform: scale(0.9);
+        }
+
+        .qty-val {
+            min-width: 25px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* Sticky Bottom Cart Bar */
+        .cart-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            display: none; /* Hidden by default, shows when item added */
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cart-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-count {
+            font-size: 0.85rem;
+            color: var(--muted-text);
+            font-weight: bold;
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .btn-checkout {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-checkout:hover {
+            background: #276b2b;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
@@ -185,283 +269,150 @@
         <img class="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://skandahollavr-dev.github.io/Sri-Raghavendra-bhavana-/" alt="QR Code" width="150" height="150">
     </div>
 
-    <!-- 1. Breakfast & Main Dishes -->
+    <!-- Breakfast & Main Dishes -->
     <div class="category-section">
         <h2>Breakfast & Main Dishes</h2>
         
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Masala Dosa</span></div>
-            <span class="item-price">₹50</span>
+        <div class="menu-item" data-id="masala-dosa" data-name="Masala Dosa" data-price="50">
+            <div class="item-details">
+                <span class="item-name">Masala Dosa</span>
+                <span class="item-price">₹50</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Open Dosa (Butter Masala)</span></div>
-            <span class="item-price">₹60</span>
+
+        <div class="menu-item" data-id="open-dosa" data-name="Open Dosa (Butter Masala)" data-price="60">
+            <div class="item-details">
+                <span class="item-name">Open Dosa (Butter Masala)</span>
+                <span class="item-price">₹60</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Khali Dosa</span></div>
-            <span class="item-price">₹45</span>
+
+        <div class="menu-item" data-id="set-dosa" data-name="Set Dosa" data-price="50">
+            <div class="item-details">
+                <span class="item-name">Set Dosa</span>
+                <span class="item-price">₹50</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Onion Dosa</span></div>
-            <span class="item-price">₹70</span>
+
+        <div class="menu-item" data-id="poori" data-name="Poori" data-price="40">
+            <div class="item-details">
+                <span class="item-name">Poori</span>
+                <span class="item-price">₹40</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Set Dosa</span></div>
-            <span class="item-price">₹50</span>
+
+        <div class="menu-item" data-id="idli-vada" data-name="Idli Vada" data-price="40">
+            <div class="item-details">
+                <span class="item-name">Idli Vada</span>
+                <span class="item-price">₹40</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Poori</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Idli</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Idli Vada</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Vada</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Curd Vada</span></div>
-            <span class="item-price">₹35</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Chapati</span></div>
-            <span class="item-price">₹50</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Meals</span></div>
-            <span class="item-price">₹80</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Rice</span></div>
-            <span class="item-price">₹50</span>
+
+        <div class="menu-item" data-id="meals" data-name="Meals" data-price="80">
+            <div class="item-details">
+                <span class="item-name">Meals</span>
+                <span class="item-price">₹80</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
     </div>
 
-    <!-- 2. Bath & Rice Varieties -->
+    <!-- Bath & Rice Varieties -->
     <div class="category-section">
         <h2>Bath & Rice Varieties</h2>
         
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Upma</span></div>
-            <span class="item-price">₹25</span>
+        <div class="menu-item" data-id="upma-kesari" data-name="Upma Kesari Bath" data-price="40">
+            <div class="item-details">
+                <span class="item-name">Upma Kesari Bath</span>
+                <span class="item-price">₹40</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Kesari Bath</span></div>
-            <span class="item-price">₹25</span>
+
+        <div class="menu-item" data-id="chitranna" data-name="Chitranna" data-price="40">
+            <div class="item-details">
+                <span class="item-name">Chitranna</span>
+                <span class="item-price">₹40</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Upma Kesari Bath</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Chitranna</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Curd Rice</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Puliyogare</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Palav</span></div>
-            <span class="item-price">₹40</span>
+
+        <div class="menu-item" data-id="palav" data-name="Palav" data-price="40">
+            <div class="item-details">
+                <span class="item-name">Palav</span>
+                <span class="item-price">₹40</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
     </div>
 
-    <!-- 3. Snacks & Sweets -->
+    <!-- Beverages -->
     <div class="category-section">
-        <h2>Snacks & Sweets</h2>
+        <h2>Beverages</h2>
         
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Pakoda</span></div>
-            <span class="item-price">₹40</span>
+        <div class="menu-item" data-id="tea-coffee" data-name="Tea / Coffee" data-price="5">
+            <div class="item-details">
+                <span class="item-name">Tea / Coffee</span>
+                <span class="item-price">₹5</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Mixture</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Plate Jilebi</span></div>
-            <span class="item-price">₹20</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Jilebi (Single)</span></div>
-            <span class="item-price">₹10</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Gulab Jamun</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Avalakki Sev</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Mirchi</span></div>
-            <span class="item-price">₹5</span>
-        </div>
-    </div>
 
-    <!-- 4. Single & Half Portions -->
-    <div class="category-section">
-        <h2>Single & Half Portions</h2>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Single Chapati</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Single Khali Dosa</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Single Poori</span></div>
-            <span class="item-price">₹20</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Single Idli</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Single Idli Vada</span></div>
-            <span class="item-price">₹30</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Half Pakoda</span></div>
-            <span class="item-price">₹20</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Half Curd Rice</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Half Chitranna</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Half Palav</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Half Puliyogare</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-    </div>
-
-    <!-- 5. Beverages & Cold Drinks -->
-    <div class="category-section">
-        <h2>Beverages & Cold Drinks</h2>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Tea / Coffee</span></div>
-            <span class="item-price">₹5</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Buttermilk</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Nandini Badam Milk</span></div>
-            <span class="item-price">₹25</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Soft Drink Bottles (Sting / Mazaa / Sprite / Fanta / Mirinda)</span></div>
-            <span class="item-price">₹20</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Soft Drink Glasses (Sprite / Fanta / Limca / Thums Up)</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Bindu Jeera</span></div>
-            <span class="item-price">₹15</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Water Bottle (500ml)</span></div>
-            <span class="item-price">₹10</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Water Bottle (1L)</span></div>
-            <span class="item-price">₹20</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Water Bottle (2L)</span></div>
-            <span class="item-price">₹30</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Sprite (400ml)</span></div>
-            <span class="item-price">₹40</span>
-        </div>
-    </div>
-
-    <!-- 6. Sweets by Weight & Ice Cream -->
-    <div class="category-section">
-        <h2>Sweets by Weight & Ice Cream</h2>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Jilebi (250g)</span></div>
-            <span class="item-price">₹70</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Mixture (250g)</span></div>
-            <span class="item-price">₹70</span>
-        </div>
-        
-        <div class="menu-item">
-            <div class="item-details"><span class="item-name">Ice Creams</span></div>
-            <span class="item-price">₹10 - ₹40</span>
+        <div class="menu-item" data-id="badam-milk" data-name="Nandini Badam Milk" data-price="25">
+            <div class="item-details">
+                <span class="item-name">Nandini Badam Milk</span>
+                <span class="item-price">₹25</span>
+            </div>
+            <div class="quantity-controls">
+                <button class="btn-qty minus">-</button>
+                <span class="qty-val">0</span>
+                <button class="btn-qty plus">+</button>
+            </div>
         </div>
     </div>
 
@@ -470,5 +421,101 @@
     </footer>
 </div>
 
+<!-- Sticky Bottom Cart Bar -->
+<div class="cart-bar" id="cartBar">
+    <div class="cart-info">
+        <span class="cart-count" id="cartCount">0 Items Selected</span>
+        <span class="cart-total" id="cartTotal">₹0</span>
+    </div>
+    <button class="btn-checkout" onclick="sendWhatsAppOrder()">
+        <span>Order on WhatsApp</span> 📲
+    </button>
+</div>
+
+<script>
+    // Cart object to store items ordered
+    const cart = {};
+    const shopPhoneNumber = "918095004556"; // Your WhatsApp Number (including country code 91)
+
+    // Select all plus and minus buttons
+    document.querySelectorAll('.menu-item').forEach(item => {
+        const id = item.getAttribute('data-id');
+        const name = item.getAttribute('data-name');
+        const price = parseInt(item.getAttribute('data-price'));
+        const qtyVal = item.querySelector('.qty-val');
+        
+        const btnPlus = item.querySelector('.plus');
+        const btnMinus = item.querySelector('.minus');
+
+        btnPlus.addEventListener('click', () => {
+            if (!cart[id]) {
+                cart[id] = { name: name, price: price, qty: 0 };
+            }
+            cart[id].qty++;
+            qtyVal.innerText = cart[id].qty;
+            updateCart();
+        });
+
+        btnMinus.addEventListener('click', () => {
+            if (cart[id] && cart[id].qty > 0) {
+                cart[id].qty--;
+                qtyVal.innerText = cart[id].qty;
+                if (cart[id].qty === 0) {
+                    delete cart[id];
+                }
+                updateCart();
+            }
+        });
+    });
+
+    // Update sticky cart calculations
+    function updateCart() {
+        let totalQty = 0;
+        let totalPrice = 0;
+
+        for (const id in cart) {
+            totalQty += cart[id].qty;
+            totalPrice += cart[id].price * cart[id].qty;
+        }
+
+        const cartBar = document.getElementById('cartBar');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+
+        if (totalQty > 0) {
+            cartBar.style.display = 'flex';
+            cartCount.innerText = totalQty + " Item" + (totalQty > 1 ? "s" : "") + " Selected";
+            cartTotal.innerText = "₹" + totalPrice;
+        } else {
+            cartBar.style.display = 'none';
+        }
+    }
+
+    // Format order and open WhatsApp
+    function sendWhatsAppOrder() {
+        let orderText = "*🟢 NEW ORDER FROM WEBSITE*\n";
+        orderText += "-------------------------------\n";
+        
+        let grandTotal = 0;
+        for (const id in cart) {
+            const item = cart[id];
+            const itemTotal = item.price * item.qty;
+            orderText += `• ${item.qty} x *${item.name}* (₹${itemTotal})\n`;
+            grandTotal += itemTotal;
+        }
+
+        orderText += "-------------------------------\n";
+        orderText += `*Total Bill: ₹${grandTotal}*\n\n`;
+        orderText += "_Please prepare my order!_";
+
+        // URL encode the text so WhatsApp can read it
+        const encodedText = encodeURIComponent(orderText);
+        
+        // Open user's WhatsApp directly on their phone
+        window.open(`https://wa.me/${shopPhoneNumber}?text=${encodedText}`, '_blank');
+    }
+</script>
+
 </body>
 </html>
+
