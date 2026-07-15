@@ -466,3 +466,4 @@
             <div class="item-details"><span class="item-name">Single Poori</span><span class="item-price">₹20</span></div>
             <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</sp
 
+<img src="[https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fskandahollavr-dev.github.io%2FSri-Raghavendra-bhavana-%2F%3Ftable%3D1](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fskandahollavr-dev.github.io%2FSri-Raghavendra-bhavana-%2F%3Ftable%3D1)" width="120" height="120" alt="Table 1 QR">
