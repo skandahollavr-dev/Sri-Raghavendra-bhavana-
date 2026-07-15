@@ -4,466 +4,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sri Raghavendra Bhavan - Order Online</title>
-    <!-- QR Code Scanner Library -->
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    <title>Sri Raghavendra Bhavan</title>
     <style>
         :root {
-            --primary-color: #e65100;
-            --secondary-color: #2e7d32;
-            --background-color: #fdfbf7;
-            --card-color: #ffffff;
-            --text-color: #333333;
-            --muted-text: #666666;
-            --border-color: #f0eae1;
+            --primary: #e65100;
+            --secondary: #2e7d32;
+            --background: #f7f9fc;
+            --surface: #ffffff;
+            --text: #333333;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px 15px 120px 15px;
+            padding-bottom: 100px; /* Space for sticky cart */
         }
 
         header {
+            background: var(--surface);
             text-align: center;
-            padding: 30px 20px;
-            background: var(--card-color);
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color);
+            padding: 20px 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--primary);
         }
 
-        h1 {
-            margin: 0 0 8px 0;
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+        header h1 {
+            color: var(--primary);
+            margin: 0 0 5px 0;
+            font-size: 24px;
         }
 
-        .tagline {
-            font-size: 0.95rem;
-            color: var(--muted-text);
-            margin-bottom: 15px;
-            font-weight: 500;
+        header p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
         }
 
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .info-tag {
-            background: #fff3e0;
-            color: #b26a00;
-            padding: 6px 12px;
-            border-radius: 20px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .info-tag.phone {
-            background: #e8f5e9;
-            color: var(--secondary-color);
-        }
-
-        /* Table Number Indicator */
-        .table-badge {
-            background: #e0f2f1;
-            color: #00695c;
-            font-weight: 800;
-            padding: 8px 16px;
-            border-radius: 20px;
-            display: inline-block;
-            margin-top: 15px;
-            font-size: 1rem;
-            border: 1px solid #b2dfdb;
-            cursor: pointer;
-        }
-
-        /* QR Scanner Section styling */
-        .scanner-section {
-            background: #efebe9;
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            border: 1px solid #d7ccc8;
-        }
-
-        .btn-scanner {
-            background: #4e342e;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(78, 52, 46, 0.2);
-        }
-
-        #reader {
-            width: 100%;
-            max-width: 350px;
-            margin: 15px auto 0 auto;
+        /* 🎯 Table Selection Styling */
+        .table-selector-box {
+            background: #fffde7;
+            border: 2px dashed #ffe082;
             border-radius: 12px;
-            overflow: hidden;
-            display: none;
+            margin: 15px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table-selector-box h3 {
+            margin: 0 0 10px 0;
+            color: #b26a00;
+            font-size: 16px;
+        }
+
+        .table-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .table-btn {
             background: white;
+            border: 1.5px solid #ffe082;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s ease;
         }
 
-        .category-section {
-            background: var(--card-color);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-color);
+        .table-btn.selected {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.3);
         }
 
-        h2 {
-            color: var(--primary-color);
-            font-size: 1.3rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #ffe0b2;
+        /* 📋 Menu Grid styling */
+        .category-title {
+            color: var(--primary);
+            margin: 20px 15px 10px 15px;
+            font-size: 18px;
+            border-left: 4px solid var(--primary);
+            padding-left: 8px;
         }
 
-        .menu-item {
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .menu-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px dashed var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .item-details {
-            flex-grow: 1;
-            padding-right: 15px;
-        }
-
-        .item-name {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: var(--text-color);
-            display: block;
+        .item-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 16px;
         }
 
         .item-price {
-            font-weight: 700;
-            font-size: 1rem;
-            color: var(--secondary-color);
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 15px;
         }
 
-        .quantity-controls {
+        /* ➕ Add / Quantity Buttons */
+        .qty-controls {
             display: flex;
             align-items: center;
-            background: #f5f5f5;
-            border-radius: 30px;
-            padding: 3px;
+            gap: 10px;
         }
 
-        .btn-qty {
-            background: white;
-            border: 1px solid #ddd;
-            color: var(--primary-color);
+        .add-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .adjust-btn {
+            background: #f0f0f0;
+            border: none;
             width: 28px;
             height: 28px;
             border-radius: 50%;
-            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .btn-qty:active {
-            transform: scale(0.9);
-        }
-
-        .qty-val {
-            min-width: 25px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
-
+        /* 🛒 Sticky Footer Cart styling */
         .cart-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
-            padding: 15px 20px;
-            display: none;
+            background: var(--surface);
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            padding: 15px;
+            display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top: 1px solid #eee;
             z-index: 1000;
-            border-top: 1px solid var(--border-color);
         }
 
-        .cart-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-count {
-            font-size: 0.85rem;
-            color: var(--muted-text);
-            font-weight: bold;
-        }
-
-        .cart-total {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        .btn-checkout {
-            background: #2e7d32;
+        .order-btn {
+            background: var(--secondary);
             color: white;
             border: none;
             padding: 12px 24px;
-            border-radius: 30px;
+            font-size: 16px;
             font-weight: bold;
-            font-size: 1rem;
+            border-radius: 30px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.85rem;
-            color: var(--muted-text);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
     <header>
         <h1>Sri Raghavendra Bhavan</h1>
-        <div class="tagline">Delicious & Fresh Vegetarian Food</div>
-        <div class="contact-info">
-            <span class="info-tag">📍 Malebennur</span>
-            <a href="tel:8095004556" class="info-tag phone">📞 Call: 8095004556</a>
-        </div>
-        <!-- Table Number Badge -->
-        <div class="table-badge" id="tableBadge" onclick="askTableNumber()">
-            🍽️ Table: <span id="tableNo">Not Set</span> (Tap to Change)
-        </div>
+        <p>📍 Sh Road, Malebennur | 📞 8095004556</p>
     </header>
 
-    <!-- QR Code Scanner Feature -->
-    <div class="scanner-section">
-        <button class="btn-scanner" id="scanBtn" onclick="toggleScanner()">📷 Scan Table QR</button>
-        <div id="reader"></div>
+    <!-- 🎯 Table Selection Box (All 8 Tables) -->
+    <div class="table-selector-box">
+        <h3 id="tableStatus">👉 Please Select Your Table Number:</h3>
+        <div class="table-buttons">
+            <button class="table-btn" onclick="selectTable(1)">Tab 1</button>
+            <button class="table-btn" onclick="selectTable(2)">Tab 2</button>
+            <button class="table-btn" onclick="selectTable(3)">Tab 3</button>
+            <button class="table-btn" onclick="selectTable(4)">Tab 4</button>
+            <button class="table-btn" onclick="selectTable(5)">Tab 5</button>
+            <button class="table-btn" onclick="selectTable(6)">Tab 6</button>
+            <button class="table-btn" onclick="selectTable(7)">Tab 7</button>
+            <button class="table-btn" onclick="selectTable(8)">Tab 8</button>
+        </div>
     </div>
 
-    <!-- 1. DOSA & BREAKFAST ITEMS -->
-    <div class="category-section">
-        <h2>Dosa & Breakfast</h2>
+    <!-- 📋 Menu Sections -->
+    <div id="menu-container"></div>
+
+    <!-- 🛒 Sticky Cart Bar -->
+    <div class="cart-bar">
+        <div>
+            <div style="font-size: 12px; color: #666;">Total Items</div>
+            <div id="cartTotal" style="font-size: 18px; font-weight: bold; color: var(--primary);">₹0</div>
+        </div>
+        <button class="order-btn" onclick="sendWhatsAppOrder()">
+            💬 Send Order on WhatsApp
+        </button>
+    </div>
+
+<script>
+    // 🍔 Complete menu database formatted directly from your images
+    const menuData = {
+        "Main Dishes": [
+            { id: "masala_dosa", name: "Masala Dosa", price: 50 },
+            { id: "open_dosa", name: "Open Dosa", price: 60 },
+            { id: "khali_dosa", name: "Khali Dosa", price: 45 },
+            { id: "onion_dosa", name: "Onion Dosa", price: 70 },
+            { id: "set_dosa", name: "Set Dosa", price: 50 },
+            { id: "poori", name: "Poori", price: 40 },
+            { id: "idli", name: "Idli", price: 25 },
+            { id: "idli_vada", name: "Idli Vada", price: 40 },
+            { id: "chapati", name: "Chapati", price: 50 },
+            { id: "meals", name: "Meals", price: 80 },
+            { id: "rice", name: "Rice", price: 50 },
+            { id: "upma", name: "Upma", price: 25 },
+            { id: "kesari_bath", name: "Kesari Bath", price: 25 },
+            { id: "upma_kesari_bath", name: "Upma Kesari Bath", price: 40 },
+            { id: "chitranna", name: "Chitranna", price: 40 },
+            { id: "curd_rice", name: "Curd Rice", price: 40 },
+            { id: "puliyogare", name: "Puliyogare", price: 40 },
+            { id: "palav", name: "Palav", price: 40 }
+        ],
+        "Single / Half Portions": [
+            { id: "single_idli", name: "Single Idli", price: 15 },
+            { id: "single_idli_vada", name: "Single Idli Vada", price: 30 },
+            { id: "single_khali_dosa", name: "Single Khali Dosa", price: 25 },
+            { id: "single_poori", name: "Single Poori", price: 20 },
+            { id: "single_chapati", name: "Single Chapati", price: 25 },
+            { id: "half_pakoda", name: "Half Pakoda", price: 20 },
+            { id: "half_curd_rice", name: "Half Curd Rice", price: 25 },
+            { id: "half_chitranna", name: "Half Chitranna", price: 25 },
+            { id: "half_palav", name: "Half Palav", price: 25 },
+            { id: "half_puliyogare", name: "Half Puliyogare", price: 25 }
+        ],
+        "Snacks & Sweets": [
+            { id: "pakoda", name: "Pakoda", price: 40 },
+            { id: "mixture", name: "Mixture", price: 40 },
+            { id: "plate_jilebi", name: "Plate Jilebi", price: 20 },
+            { id: "jilebi", name: "Jilebi", price: 10 },
+            { id: "gulab_jamun", name: "Gulab Jamun", price: 15 },
+            { id: "curd_vada", name: "Curd Vada", price: 35 },
+            { id: "vada", name: "Vada", price: 15 },
+            { id: "mirchi", name: "Mirchi", price: 5 },
+            { id: "avalakki_sev", name: "Avalakki Sev", price: 40 },
+            { id: "jilebi_250g", name: "Jilebi (250g)", price: 70 },
+            { id: "mixture_250g", name: "Mixture (250g)", price: 70 }
+        ],
+        "Juices & Soft Drinks": [
+            { id: "tea", name: "Tea", price: 5 },
+            { id: "coffee", name: "Coffee", price: 5 },
+            { id: "nandini_badam_milk", name: "Nandini Badam Milk", price: 25 },
+            { id: "butter_milk", name: "Butter Milk", price: 15 },
+            { id: "water_500ml", name: "Water (500ml)", price: 10 },
+            { id: "water_1l", name: "Water (1L)", price: 20 },
+            { id: "water_2l", name: "Water (2L)", price: 30 },
+            { id: "maaza_glass", name: "Maaza Glass", price: 15 },
+            { id: "maaza_bottle", name: "Mazaa Bottle", price: 20 },
+            { id: "fanta_glass", name: "Fanta Glass", price: 15 },
+            { id: "fanta_bottle", name: "Fanta Bottle", price: 20 },
+            { id: "sprite_glass", name: "Sprite Glass", price: 15 },
+            { id: "sprite_400ml", name: "Sprite (400ml)", price: 40 },
+            { id: "sprite_bottle", name: "Sprite Bottle", price: 20 },
+            { id: "limca_glass", name: "Limca Glass", price: 15 },
+            { id: "mirinda", name: "Mirinda", price: 20 },
+            { id: "bindu_jeera", name: "Bindu Jeera", price: 15 },
+            { id: "pineapple", name: "Pineapple Juice", price: 15 },
+            { id: "sipon_orange", name: "Sipon Orange", price: 15 },
+            { id: "sipon_tender_water", name: "Sipon Tender Water", price: 20 },
+            { id: "chill_mill", name: "Chill Mill", price: 10 },
+            { id: "sting", name: "Sting", price: 20 },
+            { id: "thumps_up_glass", name: "Thums Up Glass", price: 15 }
+        ],
+        "Ice Creams": [
+            { id: "ice_10", name: "Ice Cream (₹10)", price: 10 },
+            { id: "ice_20", name: "Ice Cream (₹20)", price: 20 },
+            { id: "ice_25", name: "Ice Cream (₹25)", price: 25 },
+            { id: "ice_30", name: "Ice Cream (₹30)", price: 30 },
+            { id: "ice_40", name: "Ice Cream (₹40)", price: 40 }
+        ]
+    };
+
+    let selectedTableNum = null;
+    let cart = {};
+
+    // 🚀 Select table handler
+    function selectTable(num) {
+        selectedTableNum = num;
         
-        <div class="menu-item" data-id="masala-dosa" data-name="Masala Dosa" data-price="50">
-            <div class="item-details"><span class="item-name">Masala Dosa</span><span class="item-price">₹50</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
+        // Highlight active button
+        document.querySelectorAll('.table-btn').forEach((btn, index) => {
+            if (index + 1 === num) {
+                btn.classList.add('selected');
+            } else {
+                btn.classList.remove('selected');
+            }
+        });
+
+        document.getElementById('tableStatus').innerText = `✅ Table Selected: Table ${num}`;
+        document.getElementById('tableStatus').style.color = "var(--secondary)";
+    }
+
+    // 🎨 Render Menu on page
+    function renderMenu() {
+        const container = document.getElementById('menu-container');
+        container.innerHTML = '';
+
+        for (const [category, items] of Object.entries(menuData)) {
+            const catTitle = document.createElement('h3');
+            catTitle.className = 'category-title';
+            catTitle.innerText = category;
+            container.appendChild(catTitle);
+
+            const grid = document.createElement('div');
+            grid.className = 'menu-grid';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'menu-card';
+                card.innerHTML = `
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <div class="item-price">₹${item.price}</div>
+                    </div>
+                    <div class="qty-controls" id="controls-${item.id}">
+                        <button class="add-btn" onclick="addToCart('${item.id}', '${item.name}', ${item.price})">ADD</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            container.appendChild(grid);
+        }
+    }
+
+    function addToCart(id, name, price) {
+        cart[id] = { name, price, qty: 1 };
+        updateQtyUI(id);
+        calculateTotal();
+    }
+
+    // Adjust quantity
+    function updateQty(id, change) {
+        if (!cart[id]) return;
+        cart[id].qty += change;
+        if (cart[id].qty <= 0) {
+            delete cart[id];
+            resetAddBtn(id);
+        } else {
+            updateQtyUI(id);
+        }
+        calculateTotal();
+    }
+
+    function updateQtyUI(id) {
+        const container = document.getElementById(`controls-${id}`);
+        if (!container) return;
+        container.innerHTML = `
+            <button class="adjust-btn" onclick="updateQty('${id}', -1)">-</button>
+            <span style="font-weight: bold; min-width: 15px; text-align: center;">${cart[id].qty}</span>
+            <button class="adjust-btn" onclick="updateQty('${id}', 1)">+</button>
+        `;
+    }
+
+    function resetAddBtn(id) {
+        const container = document.getElementById(`controls-${id}`);
+        if (!container) return;
+        // Find item to restore standard ADD button setup
+        let foundItem = null;
+        for (const items of Object.values(menuData)) {
+            foundItem = items.find(item => item.id === id);
+            if (foundItem) break;
+        }
+        if (foundItem) {
+            container.innerHTML = `<button class="add-btn" onclick="addToCart('${foundItem.id}', '${foundItem.name}', ${foundItem.price})">ADD</button>`;
+        }
+    }
+
+    function calculateTotal() {
+        let total = 0;
+        for (const item of Object.values(cart)) {
+            total += item.price * item.qty;
+        }
+        document.getElementById('cartTotal').innerText = `₹${total}`;
+    }
+
+    // 📤 Send structured order to WhatsApp
+    function sendWhatsAppOrder() {
+        if (!selectedTableNum) {
+            alert("❌ Please select your Table Number at the top of the menu before sending your order!");
+            document.querySelector('.table-selector-box').scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
+        const cartItems = Object.values(cart);
+        if (cartItems.length === 0) {
+            alert("❌ Your cart is empty. Please add items to order.");
+            return;
+        }
+
+        let totalBill = 0;
+        let message = `🍽️ *SRI RAGHAVENDRA BHAVAN*\n`;
+        message += `📍 *Table Number:* Table ${selectedTableNum}\n`;
+        message += `-----------------------------\n`;
+
+        cartItems.forEach(item => {
+            const cost = item.price * item.qty;
+            totalBill += cost;
+            message += `▪️ ${item.name} x ${item.qty} = *₹${cost}*\n`;
+        });
+
+        message += `-----------------------------\n`;
+        message += `💰 *Grand Total:* *₹${totalBill}*\n\n`;
+        message += `Please prepare our order! Thank you.`;
+
+        // Restaurant Phone Number setup
+        const phoneNumber = "918095004556"; 
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
         
-        <div class="menu-item" data-id="open-dosa" data-name="Open Dosa" data-price="60">
-            <div class="item-details"><span class="item-name">Open Dosa</span><span class="item-price">₹60</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
+        window.open(whatsappUrl, '_blank');
+    }
 
-        <div class="menu-item" data-id="khali-dosa" data-name="Khali Dosa" data-price="45">
-            <div class="item-details"><span class="item-name">Khali Dosa</span><span class="item-price">₹45</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
+    // Run setup on page load
+    window.onload = function() {
+        renderMenu();
+    }
+</script>
 
-        <div class="menu-item" data-id="onion-dosa" data-name="Onion Dosa" data-price="70">
-            <div class="item-details"><span class="item-name">Onion Dosa</span><span class="item-price">₹70</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="set-dosa" data-name="Set Dosa" data-price="50">
-            <div class="item-details"><span class="item-name">Set Dosa</span><span class="item-price">₹50</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="poori" data-name="Poori" data-price="40">
-            <div class="item-details"><span class="item-name">Poori</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="idli" data-name="Idli" data-price="25">
-            <div class="item-details"><span class="item-name">Idli</span><span class="item-price">₹25</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="idli-vada" data-name="Idli Vada" data-price="40">
-            <div class="item-details"><span class="item-name">Idli Vada</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="vada" data-name="Vada" data-price="15">
-            <div class="item-details"><span class="item-name">Vada</span><span class="item-price">₹15</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="curd-vada" data-name="Curd Vada" data-price="35">
-            <div class="item-details"><span class="item-name">Curd Vada</span><span class="item-price">₹35</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-    </div>
-
-    <!-- 2. MAIN MEALS & BREADS -->
-    <div class="category-section">
-        <h2>Meals & Breads</h2>
-        
-        <div class="menu-item" data-id="chapati" data-name="Chapati" data-price="50">
-            <div class="item-details"><span class="item-name">Chapati</span><span class="item-price">₹50</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="meals" data-name="Meals" data-price="80">
-            <div class="item-details"><span class="item-name">Meals</span><span class="item-price">₹80</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="rice" data-name="Rice" data-price="50">
-            <div class="item-details"><span class="item-name">Rice</span><span class="item-price">₹50</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-    </div>
-
-    <!-- 3. BATHS & RICE VARIETIES -->
-    <div class="category-section">
-        <h2>Rice & Bath Varieties</h2>
-
-        <div class="menu-item" data-id="upma" data-name="Upma" data-price="25">
-            <div class="item-details"><span class="item-name">Upma</span><span class="item-price">₹25</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="kesari-bath" data-name="Kesari Bath" data-price="25">
-            <div class="item-details"><span class="item-name">Kesari Bath</span><span class="item-price">₹25</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="upma-kesari-bath" data-name="Upma Kesari Bath" data-price="40">
-            <div class="item-details"><span class="item-name">Upma Kesari Bath</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="chitranna" data-name="Chitranna" data-price="40">
-            <div class="item-details"><span class="item-name">Chitranna</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="curd-rice" data-name="Curd Rice" data-price="40">
-            <div class="item-details"><span class="item-name">Curd Rice</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="puliyogare" data-name="Puliyogare" data-price="40">
-            <div class="item-details"><span class="item-name">Puliyogare</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="palav" data-name="Palav" data-price="40">
-            <div class="item-details"><span class="item-name">Palav</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-    </div>
-
-    <!-- 4. SNACKS & SWEETS -->
-    <div class="category-section">
-        <h2>Snacks & Sweets</h2>
-
-        <div class="menu-item" data-id="mixture" data-name="Mixture" data-price="40">
-            <div class="item-details"><span class="item-name">Mixture</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="pakoda" data-name="Pakoda" data-price="40">
-            <div class="item-details"><span class="item-name">Pakoda</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="plate-jilebi" data-name="Plate Jilebi" data-price="20">
-            <div class="item-details"><span class="item-name">Plate Jilebi</span><span class="item-price">₹20</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="jilebi" data-name="Jilebi" data-price="10">
-            <div class="item-details"><span class="item-name">Jilebi (Single)</span><span class="item-price">₹10</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="gulab-jamun" data-name="Gulab Jamun" data-price="15">
-            <div class="item-details"><span class="item-name">Gulab Jamun</span><span class="item-price">₹15</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="avalakki-sev" data-name="Avalakki Sev" data-price="40">
-            <div class="item-details"><span class="item-name">Avalakki Sev</span><span class="item-price">₹40</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="mirchi" data-name="Mirchi" data-price="5">
-            <div class="item-details"><span class="item-name">Mirchi</span><span class="item-price">₹5</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-    </div>
-
-    <!-- 5. SINGLE & HALF PORTIONS -->
-    <div class="category-section">
-        <h2>Single & Half Portions</h2>
-
-        <div class="menu-item" data-id="single-chapati" data-name="Single Chapati" data-price="25">
-            <div class="item-details"><span class="item-name">Single Chapati</span><span class="item-price">₹25</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="single-khali-dosa" data-name="Single Khali Dosa" data-price="25">
-            <div class="item-details"><span class="item-name">Single Khali Dosa</span><span class="item-price">₹25</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</span><button class="btn-qty plus">+</button></div>
-        </div>
-
-        <div class="menu-item" data-id="single-poori" data-name="Single Poori" data-price="20">
-            <div class="item-details"><span class="item-name">Single Poori</span><span class="item-price">₹20</span></div>
-            <div class="quantity-controls"><button class="btn-qty minus">-</button><span class="qty-val">0</sp
-
-<img src="[https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fskandahollavr-dev.github.io%2FSri-Raghavendra-bhavana-%2F%3Ftable%3D1](https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fskandahollavr-dev.github.io%2FSri-Raghavendra-bhavana-%2F%3Ftable%3D1)" width="120" height="120" alt="Table 1 QR">
+</body>
+</html>
