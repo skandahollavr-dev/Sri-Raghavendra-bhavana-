@@ -1,453 +1,1114 @@
-# Sri-Raghavendra-bhavana- /  [ index.html        ]
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sri Raghavendra Bhavan</title>
-    <style>
-        :root {
-            --primary: #e65100;
-            --secondary: #2e7d32;
-            --background: #f7f9fc;
-            --surface: #ffffff;
-            --text: #333333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            margin: 0;
-            padding: 0;
-            padding-bottom: 100px; /* Space for sticky cart */
-        }
+  <title>Sri Raghavendra Bhavana | Order Online</title>
 
-        header {
-            background: var(--surface);
-            text-align: center;
-            padding: 20px 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border-bottom: 3px solid var(--primary);
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        header h1 {
-            color: var(--primary);
-            margin: 0 0 5px 0;
-            font-size: 24px;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      padding-bottom: 90px;
+    }
 
-        header p {
-            margin: 5px 0;
-            color: #666;
-            font-size: 14px;
-        }
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: white;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+    }
 
-        /* 🎯 Table Selection Styling */
-        .table-selector-box {
-            background: #fffde7;
-            border: 2px dashed #ffe082;
-            border-radius: 12px;
-            margin: 15px;
-            padding: 15px;
-            text-align: center;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-        .table-selector-box h3 {
-            margin: 0 0 10px 0;
-            color: #b26a00;
-            font-size: 16px;
-        }
+    .logo {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #111;
+      color: #d4af37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 13px;
+    }
 
-        .table-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
+    .brand h2 {
+      font-size: 17px;
+    }
 
-        .table-btn {
-            background: white;
-            border: 1.5px solid #ffe082;
-            padding: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
+    .brand p {
+      font-size: 11px;
+      color: #777;
+      margin-top: 3px;
+    }
 
-        .table-btn.selected {
-            background: var(--secondary);
-            color: white;
-            border-color: var(--secondary);
-            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.3);
-        }
+    .cart-button {
+      background: #16833b;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        /* 📋 Menu Grid styling */
-        .category-title {
-            color: var(--primary);
-            margin: 20px 15px 10px 15px;
-            font-size: 18px;
-            border-left: 4px solid var(--primary);
-            padding-left: 8px;
-        }
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg,#151515,#3c3c3c);
+      color: white;
+      padding: 30px 20px;
+    }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            padding: 0 15px;
-        }
+    .hero h1 {
+      font-size: 30px;
+      margin: 10px 0;
+    }
 
-        @media (min-width: 600px) {
-            .menu-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
+    .hero p {
+      color: #ddd;
+      font-size: 14px;
+    }
 
-        .menu-card {
-            background: var(--surface);
-            border-radius: 12px;
-            padding: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
+    .table-badge {
+      display: inline-block;
+      background: #d4af37;
+      color: #111;
+      padding: 8px 13px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 15px;
+      font-size: 13px;
+    }
 
-        .item-info h4 {
-            margin: 0 0 4px 0;
-            font-size: 16px;
-        }
+    /* CATEGORY BAR */
+    .categories {
+      position: sticky;
+      top: 74px;
+      z-index: 900;
+      background: white;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
 
-        .item-price {
-            color: var(--secondary);
-            font-weight: bold;
-            font-size: 15px;
-        }
+    .categories button {
+      white-space: nowrap;
+      padding: 9px 15px;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
 
-        /* ➕ Add / Quantity Buttons */
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .categories button.active {
+      background: #111;
+      color: white;
+    }
 
-        .add-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    /* MENU */
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 10px 15px;
+    }
 
-        .adjust-btn {
-            background: #f0f0f0;
-            border: none;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .category {
+      margin-bottom: 28px;
+    }
 
-        /* 🛒 Sticky Footer Cart styling */
-        .cart-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #eee;
-            z-index: 1000;
-        }
+    .category h2 {
+      font-size: 21px;
+      margin: 15px 0;
+    }
 
-        .order-btn {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-    </style>
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap: 12px;
+    }
+
+    .food-card {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 8px rgba(0,0,0,.04);
+    }
+
+    .food-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .food-card p {
+      color: #777;
+      font-size: 12px;
+    }
+
+    .food-bottom {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .add-btn {
+      border: 1px solid #16833b;
+      color: #16833b;
+      background: white;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ddd;
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .quantity button {
+      width: 27px;
+      height: 27px;
+      border: none;
+      background: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* CART BAR */
+    .cart-bar {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(650px,calc(100% - 24px));
+      background: #16833b;
+      color: white;
+      border-radius: 14px;
+      padding: 13px 17px;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2000;
+      box-shadow: 0 7px 30px rgba(0,0,0,.3);
+      cursor: pointer;
+    }
+
+    .cart-bar small {
+      display: block;
+      color: #d8f5df;
+      margin-top: 3px;
+    }
+
+    /* OVERLAY */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      display: none;
+      z-index: 3000;
+    }
+
+    .overlay.show {
+      display: block;
+    }
+
+    /* CART DRAWER */
+    .cart-drawer {
+      position: fixed;
+      right: -500px;
+      top: 0;
+      height: 100%;
+      width: min(470px,100%);
+      background: white;
+      z-index: 4000;
+      transition: .3s;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .close-btn {
+      border: none;
+      background: #eee;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    #cartItems {
+      overflow-y: auto;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item small {
+      display: block;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .cart-controls {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .cart-controls button {
+      border: 1px solid #ddd;
+      background: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .bill {
+      margin-top: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+    }
+
+    .bill-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+    }
+
+    .bill-total {
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .primary-btn {
+      width: 100%;
+      background: #16833b;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 12px;
+      cursor: pointer;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+      z-index: 5000;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(500px,100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      position: relative;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 15px;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      border: none;
+      background: #eee;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    label {
+      display: block;
+      margin-top: 13px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 75px;
+      resize: vertical;
+    }
+
+    .checkout-summary {
+      background: #f7f7f7;
+      padding: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+      font-size: 13px;
+    }
+
+    /* SUCCESS */
+    .success {
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      background: #e5f7ea;
+      color: #16833b;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin: auto;
+    }
+
+    .order-number {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 12px;
+      letter-spacing: 2px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 35px 10px;
+    }
+
+    @media(max-width:600px) {
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <header>
-        <h1>Sri Raghavendra Bhavan</h1>
-        <p>📍 Sh Road, Malebennur | 📞 8095004556</p>
-    </header>
-
-    <!-- 🎯 Table Selection Box (All 8 Tables) -->
-    <div class="table-selector-box">
-        <h3 id="tableStatus">👉 Please Select Your Table Number:</h3>
-        <div class="table-buttons">
-            <button class="table-btn" onclick="selectTable(1)">Tab 1</button>
-            <button class="table-btn" onclick="selectTable(2)">Tab 2</button>
-            <button class="table-btn" onclick="selectTable(3)">Tab 3</button>
-            <button class="table-btn" onclick="selectTable(4)">Tab 4</button>
-            <button class="table-btn" onclick="selectTable(5)">Tab 5</button>
-            <button class="table-btn" onclick="selectTable(6)">Tab 6</button>
-            <button class="table-btn" onclick="selectTable(7)">Tab 7</button>
-            <button class="table-btn" onclick="selectTable(8)">Tab 8</button>
-        </div>
+<!-- HEADER -->
+<header>
+  <div class="brand">
+    <div class="logo">SRB</div>
+    <div>
+      <h2>Sri Raghavendra Bhavana</h2>
+      <p>Fresh • Tasty • Fast</p>
     </div>
+  </div>
 
-    <!-- 📋 Menu Sections -->
-    <div id="menu-container"></div>
+  <button class="cart-button" onclick="openCart()">
+    🛒 <span id="headerCount">0</span>
+  </button>
+</header>
 
-    <!-- 🛒 Sticky Cart Bar -->
-    <div class="cart-bar">
-        <div>
-            <div style="font-size: 12px; color: #666;">Total Items</div>
-            <div id="cartTotal" style="font-size: 18px; font-weight: bold; color: var(--primary);">₹0</div>
-        </div>
-        <button class="order-btn" onclick="sendWhatsAppOrder()">
-            💬 Send Order on WhatsApp
-        </button>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Order your favourites 🍽️</h1>
+  <p>Choose your food and place your order directly from your table.</p>
+
+  <div class="table-badge" id="tableBadge">
+    Select your table
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<nav class="categories" id="categories"></nav>
+
+<!-- MENU -->
+<main id="menu"></main>
+
+<!-- BOTTOM CART -->
+<div class="cart-bar" id="cartBar" onclick="openCart()">
+  <div>
+    <b><span id="cartCount">0</span> items</b>
+    <small>View your cart</small>
+  </div>
+
+  <strong>
+    ₹<span id="cartTotal">0</span> →
+  </strong>
+</div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer">
+
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="close-btn" onclick="closeCart()">✕</button>
+  </div>
+
+  <div id="cartItems"></div>
+
+  <div class="bill" id="bill"></div>
+
+  <button
+    class="primary-btn"
+    id="checkoutButton"
+    onclick="openCheckout()">
+    Proceed to Checkout
+  </button>
+
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal" id="checkoutModal">
+
+  <div class="modal-box">
+
+    <button class="modal-close" onclick="closeCheckout()">✕</button>
+
+    <h2>Checkout</h2>
+
+    <div class="checkout-summary" id="checkoutSummary"></div>
+
+    <label>
+      Customer Name
+      <input
+        type="text"
+        id="customerName"
+        placeholder="Enter your name">
+    </label>
+
+    <label>
+      Mobile Number
+      <input
+        type="tel"
+        id="customerPhone"
+        maxlength="10"
+        placeholder="10-digit mobile number">
+    </label>
+
+    <label>
+      Table Number
+      <select id="tableSelect"></select>
+    </label>
+
+    <label>
+      Payment Method
+      <select id="paymentMethod">
+        <option>Pay at Hotel (Cash)</option>
+      </select>
+    </label>
+
+    <label>
+      Special Instructions
+      <textarea
+        id="notes"
+        placeholder="Example: Less spicy, extra chutney..."></textarea>
+    </label>
+
+    <button class="primary-btn" onclick="placeOrder()">
+      🛍️ Place Order
+    </button>
+
+    <p style="text-align:center;color:#777;font-size:12px;margin-top:10px">
+      No online payment required.
+    </p>
+
+  </div>
+
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+
+  <div class="modal-box success">
+
+    <div class="success-icon">✓</div>
+
+    <h2 style="margin-top:15px">
+      Order Placed!
+    </h2>
+
+    <p>Your order number is</p>
+
+    <div class="order-number" id="orderNumber"></div>
+
+    <p id="successMessage"></p>
+
+    <button class="primary-btn" onclick="closeSuccess()">
+      Done
+    </button>
+
+  </div>
+
+</div>
 
 <script>
-    // 🍔 Complete menu database formatted directly from your images
-    const menuData = {
-        "Main Dishes": [
-            { id: "masala_dosa", name: "Masala Dosa", price: 50 },
-            { id: "open_dosa", name: "Open Dosa", price: 60 },
-            { id: "khali_dosa", name: "Khali Dosa", price: 45 },
-            { id: "onion_dosa", name: "Onion Dosa", price: 70 },
-            { id: "set_dosa", name: "Set Dosa", price: 50 },
-            { id: "poori", name: "Poori", price: 40 },
-            { id: "idli", name: "Idli", price: 25 },
-            { id: "idli_vada", name: "Idli Vada", price: 40 },
-            { id: "chapati", name: "Chapati", price: 50 },
-            { id: "meals", name: "Meals", price: 80 },
-            { id: "rice", name: "Rice", price: 50 },
-            { id: "upma", name: "Upma", price: 25 },
-            { id: "kesari_bath", name: "Kesari Bath", price: 25 },
-            { id: "upma_kesari_bath", name: "Upma Kesari Bath", price: 40 },
-            { id: "chitranna", name: "Chitranna", price: 40 },
-            { id: "curd_rice", name: "Curd Rice", price: 40 },
-            { id: "puliyogare", name: "Puliyogare", price: 40 },
-            { id: "palav", name: "Palav", price: 40 }
-        ],
-        "Single / Half Portions": [
-            { id: "single_idli", name: "Single Idli", price: 15 },
-            { id: "single_idli_vada", name: "Single Idli Vada", price: 30 },
-            { id: "single_khali_dosa", name: "Single Khali Dosa", price: 25 },
-            { id: "single_poori", name: "Single Poori", price: 20 },
-            { id: "single_chapati", name: "Single Chapati", price: 25 },
-            { id: "half_pakoda", name: "Half Pakoda", price: 20 },
-            { id: "half_curd_rice", name: "Half Curd Rice", price: 25 },
-            { id: "half_chitranna", name: "Half Chitranna", price: 25 },
-            { id: "half_palav", name: "Half Palav", price: 25 },
-            { id: "half_puliyogare", name: "Half Puliyogare", price: 25 }
-        ],
-        "Snacks & Sweets": [
-            { id: "pakoda", name: "Pakoda", price: 40 },
-            { id: "mixture", name: "Mixture", price: 40 },
-            { id: "plate_jilebi", name: "Plate Jilebi", price: 20 },
-            { id: "jilebi", name: "Jilebi", price: 10 },
-            { id: "gulab_jamun", name: "Gulab Jamun", price: 15 },
-            { id: "curd_vada", name: "Curd Vada", price: 35 },
-            { id: "vada", name: "Vada", price: 15 },
-            { id: "mirchi", name: "Mirchi", price: 5 },
-            { id: "avalakki_sev", name: "Avalakki Sev", price: 40 },
-            { id: "jilebi_250g", name: "Jilebi (250g)", price: 70 },
-            { id: "mixture_250g", name: "Mixture (250g)", price: 70 }
-        ],
-        "Juices & Soft Drinks": [
-            { id: "tea", name: "Tea", price: 5 },
-            { id: "coffee", name: "Coffee", price: 5 },
-            { id: "nandini_badam_milk", name: "Nandini Badam Milk", price: 25 },
-            { id: "butter_milk", name: "Butter Milk", price: 15 },
-            { id: "water_500ml", name: "Water (500ml)", price: 10 },
-            { id: "water_1l", name: "Water (1L)", price: 20 },
-            { id: "water_2l", name: "Water (2L)", price: 30 },
-            { id: "maaza_glass", name: "Maaza Glass", price: 15 },
-            { id: "maaza_bottle", name: "Mazaa Bottle", price: 20 },
-            { id: "fanta_glass", name: "Fanta Glass", price: 15 },
-            { id: "fanta_bottle", name: "Fanta Bottle", price: 20 },
-            { id: "sprite_glass", name: "Sprite Glass", price: 15 },
-            { id: "sprite_400ml", name: "Sprite (400ml)", price: 40 },
-            { id: "sprite_bottle", name: "Sprite Bottle", price: 20 },
-            { id: "limca_glass", name: "Limca Glass", price: 15 },
-            { id: "mirinda", name: "Mirinda", price: 20 },
-            { id: "bindu_jeera", name: "Bindu Jeera", price: 15 },
-            { id: "pineapple", name: "Pineapple Juice", price: 15 },
-            { id: "sipon_orange", name: "Sipon Orange", price: 15 },
-            { id: "sipon_tender_water", name: "Sipon Tender Water", price: 20 },
-            { id: "chill_mill", name: "Chill Mill", price: 10 },
-            { id: "sting", name: "Sting", price: 20 },
-            { id: "thumps_up_glass", name: "Thums Up Glass", price: 15 }
-        ],
-        "Ice Creams": [
-            { id: "ice_10", name: "Ice Cream (₹10)", price: 10 },
-            { id: "ice_20", name: "Ice Cream (₹20)", price: 20 },
-            { id: "ice_25", name: "Ice Cream (₹25)", price: 25 },
-            { id: "ice_30", name: "Ice Cream (₹30)", price: 30 },
-            { id: "ice_40", name: "Ice Cream (₹40)", price: 40 }
-        ]
-    };
 
-    let selectedTableNum = null;
-    let cart = {};
+  /* =========================
+     MENU
+  ========================= */
 
-    // 🚀 Select table handler
-    function selectTable(num) {
-        selectedTableNum = num;
-        
-        // Highlight active button
-        document.querySelectorAll('.table-btn').forEach((btn, index) => {
-            if (index + 1 === num) {
-                btn.classList.add('selected');
-            } else {
-                btn.classList.remove('selected');
-            }
-        });
+  const MENU = [
 
-        document.getElementById('tableStatus').innerText = `✅ Table Selected: Table ${num}`;
-        document.getElementById('tableStatus').style.color = "var(--secondary)";
+    ["Breakfast","Masala Dosa",50],
+    ["Breakfast","Open Dosa",60],
+    ["Breakfast","Khali Dosa",45],
+    ["Breakfast","Onion Dosa",70],
+    ["Breakfast","Set Dosa",50],
+    ["Breakfast","Poori",40],
+    ["Breakfast","Idli",25],
+    ["Breakfast","Upma",25],
+    ["Breakfast","Kesari Bath",25],
+    ["Breakfast","Upma Kesari Bath",40],
+    ["Breakfast","Idli Vada",40],
+    ["Breakfast","Chapati",50],
+    ["Breakfast","Single Chapati",25],
+    ["Breakfast","Single Khali Dosa",25],
+    ["Breakfast","Single Poori",20],
+    ["Breakfast","Single Idli",15],
+    ["Breakfast","Single Idli Vada",30],
+
+    ["Rice & Meals","Chitranna",40],
+    ["Rice & Meals","Curd Rice",40],
+    ["Rice & Meals","Puliyogare",40],
+    ["Rice & Meals","Palav",40],
+    ["Rice & Meals","Meals",80],
+    ["Rice & Meals","Rice",50],
+    ["Rice & Meals","Half Curd Rice",25],
+    ["Rice & Meals","Half Chitranna",25],
+    ["Rice & Meals","Half Palav",25],
+    ["Rice & Meals","Half Puliyogare",25],
+
+    ["Snacks","Mixture",40],
+    ["Snacks","Pakoda",40],
+    ["Snacks","Plate Jilebi",20],
+    ["Snacks","Jilebi",10],
+    ["Snacks","Gulab Jamun",15],
+    ["Snacks","Avalakki Sev",40],
+    ["Snacks","Mirchi",5],
+    ["Snacks","Vada",15],
+    ["Snacks","Half Pakoda",20],
+
+    ["Curd","Curd Vada",35],
+
+    ["Beverages","Coffee",5],
+    ["Beverages","Tea",5],
+    ["Beverages","Maaza Glass",15],
+    ["Beverages","Fanta Glass",15],
+    ["Beverages","Fanta",20],
+    ["Beverages","Mazaa",20],
+    ["Beverages","Sprite",20],
+    ["Beverages","Sprite Glass",15],
+    ["Beverages","Limca Glass",15],
+    ["Beverages","Bindu Jeera",15],
+    ["Beverages","Mirinda",20],
+    ["Beverages","Nandini Badam Milk",25],
+    ["Beverages","Pineapple Juice",15],
+    ["Beverages","Sipon Orange",15],
+    ["Beverages","Chill Mill",10],
+    ["Beverages","Butter Milk",15],
+    ["Beverages","Water 500ml",10],
+    ["Beverages","Water 1L",20],
+    ["Beverages","Water 2L",30],
+    ["Beverages","Sting",20],
+    ["Beverages","Thums Up Glass",15],
+    ["Beverages","Sipon Tender Water",20],
+    ["Beverages","Sprite 400ml",40],
+
+    ["Ice Creams","10 Rs Ice Cream",10],
+    ["Ice Creams","20 Rs Ice Cream",20],
+    ["Ice Creams","25 Rs Ice Cream",25],
+    ["Ice Creams","30 Rs Ice Cream",30],
+    ["Ice Creams","40 Rs Ice Cream",40],
+
+    ["Packed Items","Jilebi 250g",70],
+    ["Packed Items","Mixture 250g",70]
+
+  ];
+
+
+  /* =========================
+     CART
+  ========================= */
+
+  let cart =
+    JSON.parse(localStorage.getItem("srb_cart") || "{}");
+
+
+  /* =========================
+     TABLE FROM QR
+  ========================= */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  let tableNumber = params.get("table") || "";
+
+
+  /* =========================
+     INITIALIZE
+  ========================= */
+
+  function initialize() {
+
+    createCategories();
+
+    createTableOptions();
+
+    updateTableDisplay();
+
+    renderMenu();
+
+    renderCart();
+
+  }
+
+
+  /* =========================
+     CATEGORIES
+  ========================= */
+
+  const categories =
+    [...new Set(MENU.map(item => item[0]))];
+
+
+  function createCategories() {
+
+    let html =
+      `<button class="active"
+      onclick="showAll(this)">All</button>`;
+
+    categories.forEach(category => {
+
+      html += `
+        <button onclick="showCategory('${escapeText(category)}',this)">
+          ${category}
+        </button>
+      `;
+
+    });
+
+    document.getElementById("categories").innerHTML = html;
+
+  }
+
+
+  /* =========================
+     MENU
+  ========================= */
+
+  function renderMenu(filter = null) {
+
+    const groups =
+      filter ? [filter] : categories;
+
+    let html = "";
+
+    groups.forEach(category => {
+
+      const items =
+        MENU.filter(item => item[0] === category);
+
+      html += `
+        <section class="category">
+
+          <h2>${category}</h2>
+
+          <div class="menu-grid">
+
+            ${items.map(createFoodCard).join("")}
+
+          </div>
+
+        </section>
+      `;
+
+    });
+
+    document.getElementById("menu").innerHTML = html;
+
+  }
+
+
+  function createFoodCard(item) {
+
+    const name = item[1];
+    const price = item[2];
+
+    const quantity =
+      cart[name] ? cart[name].qty : 0;
+
+    let action;
+
+    if (quantity > 0) {
+
+      action = `
+        <div class="quantity">
+
+          <button onclick="changeQuantity('${escapeText(name)}',-1)">
+            −
+          </button>
+
+          <b>${quantity}</b>
+
+          <button onclick="changeQuantity('${escapeText(name)}',1)">
+            +
+          </button>
+
+        </div>
+      `;
+
+    } else {
+
+      action = `
+        <button
+          class="add-btn"
+          onclick="addToCart('${escapeText(name)}',${price})">
+          ADD
+        </button>
+      `;
+
     }
 
-    // 🎨 Render Menu on page
-    function renderMenu() {
-        const container = document.getElementById('menu-container');
-        container.innerHTML = '';
+    return `
+      <div class="food-card">
 
-        for (const [category, items] of Object.entries(menuData)) {
-            const catTitle = document.createElement('h3');
-            catTitle.className = 'category-title';
-            catTitle.innerText = category;
-            container.appendChild(catTitle);
+        <h3>${name}</h3>
 
-            const grid = document.createElement('div');
-            grid.className = 'menu-grid';
+        <p>Freshly prepared • Dine-in</p>
 
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'menu-card';
-                card.innerHTML = `
-                    <div class="item-info">
-                        <h4>${item.name}</h4>
-                        <div class="item-price">₹${item.price}</div>
-                    </div>
-                    <div class="qty-controls" id="controls-${item.id}">
-                        <button class="add-btn" onclick="addToCart('${item.id}', '${item.name}', ${item.price})">ADD</button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-            container.appendChild(grid);
-        }
+        <div class="food-bottom">
+
+          <span class="price">
+            ₹${price}
+          </span>
+
+          ${action}
+
+        </div>
+
+      </div>
+    `;
+
+  }
+
+
+  /* =========================
+     CART FUNCTIONS
+  ========================= */
+
+  function addToCart(name,price) {
+
+    if (!cart[name]) {
+
+      cart[name] = {
+        price: price,
+        qty: 0
+      };
+
     }
 
-    function addToCart(id, name, price) {
-        cart[id] = { name, price, qty: 1 };
-        updateQtyUI(id);
-        calculateTotal();
+    cart[name].qty++;
+
+    saveCart();
+
+    renderMenu();
+
+    renderCart();
+
+  }
+
+
+  function changeQuantity(name,amount) {
+
+    if (!cart[name]) return;
+
+    cart[name].qty += amount;
+
+    if (cart[name].qty <= 0) {
+
+      delete cart[name];
+
     }
 
-    // Adjust quantity
-    function updateQty(id, change) {
-        if (!cart[id]) return;
-        cart[id].qty += change;
-        if (cart[id].qty <= 0) {
-            delete cart[id];
-            resetAddBtn(id);
-        } else {
-            updateQtyUI(id);
-        }
-        calculateTotal();
+    saveCart();
+
+    renderMenu();
+
+    renderCart();
+
+  }
+
+
+  function saveCart() {
+
+    localStorage.setItem(
+      "srb_cart",
+      JSON.stringify(cart)
+    );
+
+  }
+
+
+  function calculateTotal() {
+
+    let total = 0;
+
+    Object.values(cart).forEach(item => {
+
+      total += item.price * item.qty;
+
+    });
+
+    return total;
+
+  }
+
+
+  function calculateCount() {
+
+    let count = 0;
+
+    Object.values(cart).forEach(item => {
+
+      count += item.qty;
+
+    });
+
+    return count;
+
+  }
+
+
+  function renderCart() {
+
+    const count =
+      calculateCount();
+
+    const total =
+      calculateTotal();
+
+    document.getElementById("headerCount")
+      .textContent = count;
+
+    document.getElementById("cartCount")
+      .textContent = count;
+
+    document.getElementById("cartTotal")
+      .textContent = total;
+
+
+    const bar =
+      document.getElementById("cartBar");
+
+    bar.style.display =
+      count > 0 ? "flex" : "none";
+
+
+    const container =
+      document.getElementById("cartItems");
+
+
+    if (count === 0) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Your cart is empty 🍽️
+          <br><br>
+          Add something delicious!
+        </div>
+      `;
+
+      document.getElementById("bill").innerHTML = "";
+
+      return;
+
     }
 
-    function updateQtyUI(id) {
-        const container = document.getElementById(`controls-${id}`);
-        if (!container) return;
-        container.innerHTML = `
-            <button class="adjust-btn" onclick="updateQty('${id}', -1)">-</button>
-            <span style="font-weight: bold; min-width: 15px; text-align: center;">${cart[id].qty}</span>
-            <button class="adjust-btn" onclick="updateQty('${id}', 1)">+</button>
-        `;
+
+    let html = "";
+
+    Object.entries(cart).forEach(([name,item]) => {
+
+      html += `
+        <div class="cart-item">
+
+          <div>
+
+            <b>${name}</b>
+
+            <small>
+              ₹${item.price} × ${item.qty}
+              = ₹${item.price * item.qty}
+            </small>
+
+          </div>
+
+          <div class="cart-controls">
+
+            <button
+              onclick="changeQuantity('${escapeText(name)}',-1)">
+              −
+            </button>
+
+            <b>${item.qty}</b>
+
+            <button
+              onclick="changeQuantity('${escapeText(name)}',1)">
+              +
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+    container.innerHTML = html;
+
+
+    document.getElementById("bill").innerHTML = `
+
+      <div class="bill-row">
+        <span>Item Total</span>
+        <b>₹${total}</b>
+      </div>
+
+      <div class="bill-row bill-total">
+        <span>To Pay</span>
+        <b>₹${total}</b>
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================
+     CART DRAWER
+  ========================= */
+
+  function openCart() {
+
+    document
+      .getElementById("overlay")
+      .classList.add("show");
+
+    document
+      .getElementById("cartDrawer")
+      .classList.add("open");
+
+  }
+
+
+  function closeCart() {
+
+    document
+      .getElementById("overlay")
+      .classList.remove("show");
+
+    document
+      .getElementById("cartDrawer")
+      .classList.remove("open");
+
+  }
+
+
+  /* =========================
+     CHECKOUT
+  ========================= */
+
+  function openCheckout() {
+
+    if (calculateCount() === 0) {
+
+      alert("Your cart is empty.");
+
+      return;
+
     }
 
-    function resetAddBtn(id) {
-        const container = document.getElementById(`controls-${id}`);
-        if (!container) return;
-        // Find item to restore standard ADD button setup
-        let foundItem = null;
-        for (const items of Object.values(menuData)) {
-            foundItem = items.find(item => item.id === id);
-            if (foundItem) break;
-        }
-        if (foundItem) {
-            container.innerHTML = `<button class="add-btn" onclick="addToCart('${foundItem.id}', '${foundItem.name}', ${foundItem.price})">ADD</button>`;
-        }
-    }
+    closeCart();
 
-    function calculateTotal() {
-        let total = 0;
-        for (const item of Object.values(cart)) {
-            total += item.price * item.qty;
-        }
-        document.getElementById('cartTotal').innerText = `₹${total}`;
-    }
+    let html = "";
 
-    // 📤 Send structured order to WhatsApp
-    function sendWhatsAppOrder() {
-        if (!selectedTableNum) {
-            alert("❌ Please select your Table Number at the top of the menu before sending your order!");
-            document.querySelector('.table-selector-box').scrollIntoView({ behavior: 'smooth' });
-            return;
-        }
+    Object.entries(cart).forEach(([name,item]) => {
 
-        const cartItems = Object.values(cart);
-        if (cartItems.length === 0) {
-            alert("❌ Your cart is empty. Please add items to order.");
-            return;
-        }
-
-        let totalBill = 0;
-        let message = `🍽️ *SRI RAGHAVENDRA BHAVAN*\n`;
-        message += `📍 *Table Number:* Table ${selectedTableNum}\n`;
-        message += `-----------------------------\n`;
-
-        cartItems.forEach(item => {
-            const cost = item.price * item.qty;
-            totalBill += cost;
-            message += `▪️ ${item.name} x ${item.qty} = *₹${cost}*\n`;
-        });
-
-        message += `-----------------------------\n`;
-        message += `💰 *Grand Total:* *₹${totalBill}*\n\n`;
-        message += `Please prepare our order! Thank you.`;
-
-        // Restaurant Phone Number setup
-        const phoneNumber = "918095004556"; 
-        const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        
-        window.open(whatsappUrl, '_blank');
-    }
-
-    // Run setup on page load
-    window.onload = function() {
-        renderMenu();
-    }
-</script>
-
-</body>
-</html>
+      html += `
+        <div class="summary-row"
