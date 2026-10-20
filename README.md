@@ -1,138 +1,84 @@
 
-<div id="food-app" style="font-family:Arial,sans-serif;max-width:1000px;margin:auto;color:#222">
-  <header style="background:#fc8019;color:white;padding:22px;border-radius:14px">
-    <h1 style="margin:0">🍴 Our Food Corner</h1>
-    <p>Delicious food, delivered to your door!</p>
-    <a href="https://menu.khide.in/590595044" target="_blank" rel="noopener"
-       style="display:inline-block;background:white;color:#fc8019;padding:10px 14px;border-radius:7px;text-decoration:none;font-weight:bold">
-       View Our Full Menu
-    </a>
-  </header>
+const HOTEL_WHATSAPP = "918095004556";
 
-  <input id="food-search" placeholder="🔍 Search food..."
-    style="box-sizing:border-box;width:100%;padding:13px;margin:18px 0;border:1px solid #ddd;border-radius:9px">
+const HOTEL_MENU = [
+  {id:1,name:"Masala Dosa",price:50,category:"Dosa"},
+  {id:2,name:"Open dosa",price:60,category:"Dosa"},
+  {id:3,name:"Khali dosa",price:45,category:"Dosa"},
+  {id:4,name:"onion dosa",price:70,category:"Dosa"},
+  {id:5,name:"Set dosa",price:50,category:"Dosa"},
+  {id:6,name:"poori",price:40,category:"Breakfast"},
+  {id:7,name:"upma",price:25,category:"Breakfast"},
+  {id:8,name:"kesari bath",price:25,category:"Breakfast"},
+  {id:9,name:"Upma kesari bath",price:40,category:"Breakfast"},
+  {id:10,name:"Chitranna",price:40,category:"Rice items"},
+  {id:11,name:"Curd rice",price:40,category:"Rice items"},
+  {id:12,name:"puliyogare",price:40,category:"Rice items"},
+  {id:13,name:"Palav",price:40,category:"Rice items"},
+  {id:14,name:"idli",price:25,category:"Breakfast"},
+  {id:15,name:"Idli vada",price:40,category:"Breakfast"},
+  {id:16,name:"Chapati plate(2)",price:50,category:"Chapati"},
+  {id:17,name:"curd vada",price:35,category:"Snacks"},
+  {id:18,name:"Meals",price:80,category:"Meals"},
+  {id:19,name:"Rice",price:50,category:"Rice items"},
+  {id:20,name:"Mixture",price:40,category:"Snacks"},
+  {id:21,name:"Pakoda",price:40,category:"Snacks"},
+  {id:22,name:"Plate jilebi",price:25,category:"Sweets"},
+  {id:23,name:"jilebi",price:15,category:"Sweets"},
+  {id:24,name:"gulag jamun",price:15,category:"Sweets"},
+  {id:25,name:"Avalakki sev",price:40,category:"Snacks"},
+  {id:26,name:"Mirchi",price:5,category:"Snacks"},
+  {id:27,name:"vada",price:15,category:"Snacks"},
+  {id:28,name:"coffee",price:5,category:"Beverages"},
+  {id:29,name:"tea",price:5,category:"Beverages"},
+  {id:30,name:"Single chapati",price:25,category:"Chapati"},
+  {id:31,name:"Single khali dosa",price:25,category:"Dosa"},
+  {id:32,name:"Single poori",price:20,category:"Breakfast"},
+  {id:33,name:"single idli",price:15,category:"Breakfast"},
+  {id:34,name:"Single idli vada",price:30,category:"Breakfast"},
+  {id:35,name:"Half pakoda",price:20,category:"Snacks"},
+  {id:36,name:"Half curd rice",price:25,category:"Rice items"},
+  {id:37,name:"Half Chitranna",price:25,category:"Rice items"},
+  {id:38,name:"Half palav",price:25,category:"Rice items"},
+  {id:39,name:"Half Puliyogare",price:25,category:"Rice items"},
+  {id:40,name:"Half avalakki",price:20,category:"Snacks"},
+  {id:41,name:"BisibeleBath",price:40,category:"Rice items"},
+  {id:42,name:"tea",price:10,category:"Beverages"},
+  {id:43,name:"Palak rice",price:40,category:"Rice items"},
+  {id:44,name:"Vangibath",price:40,category:"Rice items"},
 
-  <div id="food-categories" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-  <div id="food-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin:18px 0"></div>
+  {id:45,name:"10 rs ice",price:10,category:"Juices & Ice Creams"},
+  {id:46,name:"20 rs ice cream",price:20,category:"Juices & Ice Creams"},
+  {id:47,name:"25 rs ice cream",price:25,category:"Juices & Ice Creams"},
+  {id:48,name:"30Rs ice cream",price:30,category:"Juices & Ice Creams"},
+  {id:49,name:"40 Rs ice cream",price:40,category:"Juices & Ice Creams"},
+  {id:50,name:"maaza glass",price:15,category:"Juices & Drinks"},
+  {id:51,name:"Fanta galss",price:15,category:"Juices & Drinks"},
+  {id:52,name:"Fanta",price:20,category:"Juices & Drinks"},
+  {id:53,name:"Mazaa",price:20,category:"Juices & Drinks"},
+  {id:54,name:"Sprite",price:20,category:"Juices & Drinks"},
+  {id:55,name:"Sprite glass",price:15,category:"Juices & Drinks"},
+  {id:56,name:"limca glass",price:15,category:"Juices & Drinks"},
+  {id:57,name:"Bindu jeera",price:15,category:"Juices & Drinks"},
+  {id:58,name:"Mirinda",price:20,category:"Juices & Drinks"},
+  {id:59,name:"nandini badam milk",price:25,category:"Juices & Drinks"},
+  {id:60,name:"pineapple",price:15,category:"Juices & Drinks"},
+  {id:61,name:"sipon orange",price:15,category:"Juices & Drinks"},
+  {id:62,name:"chill mill",price:10,category:"Juices & Drinks"},
+  {id:63,name:"butter milk",price:15,category:"Juices & Drinks"},
+  {id:64,name:"water 500ml",price:10,category:"Water"},
+  {id:65,name:"water 1l",price:20,category:"Water"},
+  {id:66,name:"water 2l",price:30,category:"Water"},
+  {id:67,name:"sting",price:20,category:"Juices & Drinks"},
+  {id:68,name:"thumps up glass",price:15,category:"Juices & Drinks"},
+  {id:69,name:"sipon tender water",price:20,category:"Juices & Drinks"},
+  {id:70,name:"Sprite 400ml",price:40,category:"Juices & Drinks"},
+  {id:71,name:"Badam milk",price:30,category:"Juices & Drinks"},
+  {id:72,name:"pulpy org",price:25,category:"Juices & Drinks"},
+  {id:73,name:"soft drink",price:10,category:"Juices & Drinks"},
 
-  <section style="background:#fff7ef;padding:16px;border-radius:12px">
-    <h2>🛒 Your Cart (<span id="food-count">0</span>)</h2>
-    <div id="food-cart">Your cart is empty.</div>
-    <h3 id="food-total">Total: ₹0</h3>
-    <button id="food-checkout" style="background:#fc8019;color:white;padding:12px 18px;border:0;border-radius:8px">
-      Proceed to Checkout
-    </button>
-  </section>
-
-  <section id="food-details" style="display:none;padding:16px">
-    <h2>Delivery Details</h2>
-    <input id="food-name" placeholder="Customer name" style="box-sizing:border-box;width:100%;padding:12px;margin:5px 0">
-    <input id="food-phone" placeholder="Phone number" type="tel" style="box-sizing:border-box;width:100%;padding:12px;margin:5px 0">
-    <textarea id="food-address" placeholder="Full delivery address" style="box-sizing:border-box;width:100%;padding:12px;margin:5px 0"></textarea>
-    <p><b>Payment method:</b> Cash on Delivery</p>
-    <button id="food-place" style="background:#16803c;color:white;padding:12px 18px;border:0;border-radius:8px">
-      Place Order
-    </button>
-    <p id="food-result"></p>
-  </section>
-</div>
-
-<script>
-(function () {
-  // SAMPLE MENU: replace these items and prices with your actual menu.
-  const foods = [
-    {id:1,name:"Masala Dosa",price:119,category:"South Indian",emoji:"🥞"},
-    {id:2,name:"Idli Vada",price:80,category:"South Indian",emoji:"🍽️"},
-    {id:3,name:"Veg Burger",price:149,category:"Fast Food",emoji:"🍔"},
-    {id:4,name:"French Fries",price:99,category:"Fast Food",emoji:"🍟"},
-    {id:5,name:"Veg Pizza",price:229,category:"Fast Food",emoji:"🍕"},
-    {id:6,name:"Cold Coffee",price:89,category:"Drinks",emoji:"🥤"}
-  ];
-
-  const cart = {};
-  let category = "All";
-  const el = id => document.getElementById(id);
-  const rupees = n => "₹" + n.toFixed(2).replace(/\.00$/,"");
-
-  function renderCategories() {
-    const categories = ["All", ...new Set(foods.map(f => f.category))];
-    el("food-categories").innerHTML = categories.map(c =>
-      `<button data-category="${c}" style="padding:9px 13px;border:0;border-radius:20px;background:${c===category?"#fc8019":"#eee"};color:${c===category?"white":"#222"}">${c}</button>`
-    ).join("");
-  }
-
-  function renderFoods() {
-    const query = el("food-search").value.toLowerCase();
-    el("food-list").innerHTML = foods
-      .filter(f => (category==="All" || f.category===category) &&
-        f.name.toLowerCase().includes(query))
-      .map(f => `<article style="border:1px solid #eee;padding:14px;border-radius:12px">
-        <div style="font-size:38px">${f.emoji}</div>
-        <b>${f.name}</b>
-        <p>${f.category}</p>
-        <strong>${rupees(f.price)}</strong><br>
-        <button data-add="${f.id}" style="margin-top:10px;padding:9px 14px;border:0;border-radius:7px;background:#fc8019;color:white">+ Add</button>
-      </article>`).join("") || "<p>No food found.</p>";
-  }
-
-  function renderCart() {
-    const items = foods.filter(f => cart[f.id]);
-    const count = items.reduce((s,f) => s + cart[f.id],0);
-    const total = items.reduce((s,f) => s + f.price * cart[f.id],0);
-    el("food-count").textContent = count;
-    el("food-total").textContent = "Total: " + rupees(total);
-    el("food-cart").innerHTML = items.length ? items.map(f =>
-      `<p>${f.name} × ${cart[f.id]} — ${rupees(f.price*cart[f.id])}
-      <button data-minus="${f.id}">−</button>
-      <button data-plus="${f.id}">+</button></p>`
-    ).join("") : "Your cart is empty.";
-    return total;
-  }
-
-  el("food-app").addEventListener("click", e => {
-    const b = e.target.closest("button");
-    if (!b) return;
-
-    if (b.dataset.category) {
-      category = b.dataset.category;
-      renderCategories(); renderFoods();
-    } else if (b.dataset.add) {
-      cart[b.dataset.add] = (cart[b.dataset.add] || 0) + 1;
-      renderCart();
-    } else if (b.dataset.plus) {
-      cart[b.dataset.plus] = (cart[b.dataset.plus] || 0) + 1;
-      renderCart();
-    } else if (b.dataset.minus) {
-      cart[b.dataset.minus]--;
-      if (cart[b.dataset.minus] <= 0) delete cart[b.dataset.minus];
-      renderCart();
-    } else if (b.id === "food-checkout") {
-      if (renderCart() === 0) {
-        alert("Please add food to your cart first.");
-        return;
-      }
-      el("food-details").style.display = "block";
-      el("food-details").scrollIntoView({behavior:"smooth"});
-    } else if (b.id === "food-place") {
-      if (!renderCart()) {
-        alert("Your cart is empty."); return;
-      }
-      const name = el("food-name").value.trim();
-      const phone = el("food-phone").value.trim();
-      const address = el("food-address").value.trim();
-      if (!name || !/^[0-9+\-\s()]{8,16}$/.test(phone) || !address) {
-        alert("Please enter your name, valid phone number and delivery address.");
-        return;
-      }
-      el("food-result").textContent =
-        "Demo only: no order has been sent to the restaurant. Connect an order backend to receive real orders.";
-    }
-  });
-
-  el("food-search").addEventListener("input", renderFoods);
-  renderCategories();
-  renderFoods();
-  renderCart();
-})();
-</script>
-
+  {id:74,name:"Jilebi 250g",price:70,category:"Kg & Packaged Items"},
+  {id:75,name:"Mixture 250g",price:70,category:"Kg & Packaged Items"},
+  {id:76,name:"jilebi 500gm",price:130,category:"Kg & Packaged Items"},
+  {id:77,name:"half belebath",price:25,category:"Temporary"}
+];
